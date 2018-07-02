@@ -76,9 +76,9 @@ with open(OUTPUT_FILE, 'w') as output_file:
     writer = csv.writer(output_file)
     writer.writerow(Review.csv_headers())
     start = datetime.datetime.now()
-    current_batch = Batch(264710, 0)
+    current_batch = Batch(APP_ID, 0)
     estimated_available = current_batch.estimated_total_available()
     while current_batch.number_of_reviews_retrieved() > 0:
         print(current_batch.estimate_progress(start, estimated_available), end='\r')
         writer.writerows(current_batch.csv_lines())
-        current_batch = Batch(264710, current_batch.next_batch_start())
+        current_batch = Batch(APP_ID, current_batch.next_batch_start())
